@@ -15,13 +15,13 @@ export default function MenuSideBar({ categories }: Props) {
   return (
     <aside
       className={cn(
-        'fixed top-0 left-0 z-[3000] w-full h-full',
+        'fixed top-0 left-0 z-[3000] w-full h-full ',
         'bg-background backdrop-filter backdrop-blur-xl backdrop-opacity-90',
         'transition-transform duration-300 ease-in-out',
-        isOpen ? 'translate-x-0' : '-translate-x-full'
+        isOpen ? 'translate-x-' : '-translate-x-full'
       )}
     >
-      <div className="w-full h-full">
+      <div className="w-full h-full  max-w-[var(--base-w)] mx-auto">
         <MenuTop />
         <MenuCategoryList categories={categories} />
         <MenuBannerList />
