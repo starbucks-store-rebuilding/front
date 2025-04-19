@@ -1,5 +1,6 @@
 'use client';
-import { useState } from 'react';
+
+import { useEffect, useState } from 'react';
 import OrderItemToggleList from './OrderItemToggleList';
 import OrderItemSummary from './OrderItemSummary';
 import ToggleButton from '@/components/ui/buttons/ToggleButton';
@@ -8,6 +9,7 @@ import { OrderItemDataType } from '@/types/OrderDataType';
 import OrderPriceSummary from './OrderPriceSummary';
 import { CartItemPriceData } from '@/types/CartDataType';
 import OrderPurchaseBar from './OrderPurchaseBar';
+import { useOrderItemContext } from '@/context/OrderItemContext';
 
 interface Props {
   orderItems: OrderItemDataType[];
@@ -16,8 +18,32 @@ interface Props {
 
 export default function OrderList({ orderItems, orderPirce }: Props) {
   const [isOpen, setIsOpen] = useState(false);
-  console.log('orderItems', orderItems);
-  console.log('orderPirce', orderPirce);
+  const { setPaymentData } = useOrderItemContext();
+
+  const totalOriginPrice = orderPirce.reduce(
+    (sum, item) => sum + item.productPrice,
+    0
+  );
+
+  const totalPurchasePrice = orderPirce.reduce(
+    (sum, item) => sum + item.productSalePrice,
+    0
+  );
+
+  const orderName =
+    orderItems.length > 1
+      ? `${orderItems[0].productUuid} 외 ${orderItems.length - 1}건`
+      : orderItems[0].productUuid;
+
+  useEffect(() => {
+    setPaymentData({
+      orderName,
+      totalOriginPrice,
+      totalPurchasePrice,
+      method: '',
+    });
+  }, [orderItems, orderPirce]);
+
   return (
     <section>
       <CommonLayout.SectionInnerPadding>
@@ -38,7 +64,7 @@ export default function OrderList({ orderItems, orderPirce }: Props) {
       <CommonLayout.CommonBorder />
 
       <OrderPriceSummary orderItems={orderPirce} />
-      {/* <OrderPurchaseBar /> */}
+      <OrderPurchaseBar />
     </section>
   );
 }
