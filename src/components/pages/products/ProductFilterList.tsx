@@ -1,7 +1,10 @@
 import CategoryCarousel from './CategoryCarousel';
 import CategoryOptionCarousel from './CategoryOptionCarousel';
 import { CategoryMenuType } from '@/types/ResponseDataTypes';
-import { getSubCategoriesByCategoryid } from '@/actions/category-service';
+import {
+  getSeasonDatas,
+  getSubCategoriesByCategoryid,
+} from '@/actions/category-service';
 
 export default async function ProductFilterList({
   categoryItems,
@@ -16,11 +19,12 @@ export default async function ProductFilterList({
   const subCategories = selectedCategory
     ? await getSubCategoriesByCategoryid(selectedCategory.id)
     : undefined;
+  const seasons = await getSeasonDatas();
 
   return (
     <>
       <CategoryCarousel categories={categoryItems} />
-      {subCategories && (
+      {subCategories && subCategories.length > 0 && (
         <CategoryOptionCarousel
           items={subCategories.map(({ id, name }) => ({
             id,
@@ -30,11 +34,11 @@ export default async function ProductFilterList({
           type="subCategory"
         />
       )}
-      {/* <CategoryOptionCarousel
-        items={seasonList.map(({ seasonId, name }) => ({ id: seasonId, name }))}
+      <CategoryOptionCarousel
+        items={seasons.map(({ id, name }) => ({ id, name }))}
         title="시즌"
-        queryKey="season"
-      /> */}
+        type="season"
+      />
     </>
   );
 }

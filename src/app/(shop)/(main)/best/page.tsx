@@ -8,13 +8,15 @@ export default async function page({
 }: {
   searchParams: Promise<Record<string, string | undefined>>;
 }) {
-  const categoryData = await getAllCategories();
+  const [categoryData, params] = await Promise.all([
+    getAllCategories(),
+    searchParams,
+  ]);
+
   const categoryItems = categoryData.map((category) => ({
     id: category.id,
     name: category.name,
   }));
-
-  const params = await searchParams;
 
   const productQueryParams: getProductDataType = {
     categoryId: params.category

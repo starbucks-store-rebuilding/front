@@ -15,7 +15,7 @@ export default function CloseButton({
   return (
     <button
       type="button"
-      className={`inline-flex items-center ${className}`}
+      className={`inline-flex items-center cursor-pointer ${className}`}
       onClick={onClick}
     >
       <CloseIcon />

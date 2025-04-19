@@ -101,7 +101,6 @@ export const options: NextAuthOptions = {
               httpOnly: true,
               sameSite: 'none',
               secure: true,
-              // domain: 'back.starbucks-store.shop',
               path: '/',
             });
           }
@@ -110,8 +109,6 @@ export const options: NextAuthOptions = {
           console.log('server data', data);
           user.accessToken = data.result.accessToken;
           user.refreshToken = data.result.refreshToken;
-          // user.name = user.name;
-          // user.userUuid = data.result.uuid;
           console.log('provider: ', account.provider);
           return true;
         } catch (error) {

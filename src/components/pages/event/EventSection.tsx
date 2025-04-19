@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { EventDataType } from '@/types/ProductResponseDataTypes';
 import EventProductList from './EventProductList';
 import PrecautionAccordion from './PrecautionAccordion';
+import { CommonResposiveNextImage } from '@/components/ui/CommonResponsiveNextImage';
 
 export default async function EventSection({
   eventsData,
@@ -12,16 +13,9 @@ export default async function EventSection({
 
   return (
     <>
-      <Image
-        src={eventsData.imageUrl}
-        alt={eventsData.description}
-        sizes="100vw"
-        style={{
-          width: '100%',
-          height: 'auto',
-        }}
-        width={500}
-        height={300}
+      <CommonResposiveNextImage
+        ImageUrl={eventsData.imageUrl}
+        description={eventsData.description}
       />
       <section>
         <PrecautionAccordion title="기획전 유의사항">

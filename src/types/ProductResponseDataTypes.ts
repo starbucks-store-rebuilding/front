@@ -64,9 +64,17 @@ export interface EventDataType {
   endAt: string;
   state: boolean;
 }
+
 export interface EventProductType {
   productUuid: string;
   eventUuid: string;
+}
+
+export interface EventBannerImageType {
+  mainBannerImageUuid: string;
+  eventUuid: string;
+  imageUrl: string;
+  description: string;
 }
 
 // best

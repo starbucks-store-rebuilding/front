@@ -1,9 +1,9 @@
-
 'use server';
 
 import {
   CategoryMenuType,
   CommonResponseType,
+  SeasonType,
   SubCategoryType,
 } from '@/types/ResponseDataTypes';
 
@@ -65,6 +65,23 @@ export async function getSubCategoriesByCategoryid(categoryId: number) {
   }
 
   const data = (await res.json()) as CommonResponseType<SubCategoryType[]>;
+
+  return data.result;
+}
+
+export async function getSeasonDatas() {
+  const res = await fetch(`${process.env.BASE_API_URL}/api/v1/season/list`, {
+    method: 'GET',
+    cache: 'force-cache',
+  });
+
+  if (!res.ok) {
+    const errorData = await res.json();
+    console.error('Season Data Fetching failed:', errorData);
+    throw new Error(errorData.message);
+  }
+
+  const data = (await res.json()) as CommonResponseType<SeasonType[]>;
 
   return data.result;
 }

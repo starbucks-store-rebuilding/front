@@ -123,8 +123,8 @@ export interface CartProductType {
 }
 
 export interface SeasonType {
+  id: number;
   name: string;
-  seasonId: number;
 }
 
 export interface ProductSortOptionType {

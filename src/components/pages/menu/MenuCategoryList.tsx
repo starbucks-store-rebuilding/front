@@ -2,7 +2,7 @@ import RightArrowIcon from '@/components/ui/icons/RightArrowIcon';
 import { CategoryMenuType } from '@/types/ResponseDataTypes';
 import Link from 'next/link';
 import CategoryItem from './CategoryItem';
-import { useSideBarContext } from '@/context/SideBarContext';
+import { useModalContext } from '@/context/SideBarContext';
 import { useRouter } from 'next/navigation';
 
 interface Props {
@@ -11,7 +11,7 @@ interface Props {
 
 export default function MenuCategoryList({ categories }: Props) {
   const router = useRouter();
-  const { setIsOpen } = useSideBarContext();
+  const { setIsOpen } = useModalContext();
 
   const handleClickCategory = (categoryId: string) => {
     setIsOpen(false);

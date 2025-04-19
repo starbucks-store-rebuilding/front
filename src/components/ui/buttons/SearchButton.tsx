@@ -1,10 +1,9 @@
-import Link from 'next/link';
 import SearchIcon from '@/components/ui/icons/SearchIcon';
 
-export default function SearchButton() {
+export default function SearchButton({ onClick }: { onClick: () => void }) {
   return (
-    <Link href="/search">
+    <button onClick={onClick} className="cursor-pointer">
       <SearchIcon />
-    </Link>
+    </button>
   );
 }

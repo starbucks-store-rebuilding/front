@@ -28,7 +28,7 @@ export default function ProductListView({
         </div>
       ) : (
         <>
-          <ul className="w-full grid grid-cols-2 gap-4 min-h-[80vh]">
+          <ul className="w-full grid grid-cols-2 gap-4">
             {products.map((product) => (
               <ProductItem
                 key={product.productUuid}

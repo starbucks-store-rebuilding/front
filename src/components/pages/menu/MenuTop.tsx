@@ -1,8 +1,8 @@
 import CloseIcon from '@/components/ui/icons/CloseIcon';
-import { useSideBarContext } from '@/context/SideBarContext';
+import { useModalContext } from '@/context/SideBarContext';
 
 export default function MenuTop() {
-  const { setIsOpen } = useSideBarContext();
+  const { setIsOpen } = useModalContext();
   return (
     <section className="px-6 pt-5">
       <nav className="flex justify-end">

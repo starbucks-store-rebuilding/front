@@ -3,6 +3,7 @@ import { options } from '@/app/api/auth/[...nextauth]/options';
 import { OAuthSignUpDataType, SignUpDataType } from '@/types/RequestDataTypes';
 import { AgreementType, userInfoDataType } from '@/types/ResponseDataTypes';
 import { getServerSession } from 'next-auth';
+import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
 export async function signUpAction(signUpData: Partial<SignUpDataType>) {
@@ -36,6 +37,13 @@ export async function oAuthSignUpAction(
   signUpData: Partial<OAuthSignUpDataType>
 ) {
   const payload: Partial<OAuthSignUpDataType> = { ...signUpData };
+  const cookieStore = cookies();
+  const oauthCookie = (await cookieStore).get('oauth_cookie')?.value;
+  if (!oauthCookie)
+    return {
+      success: false,
+      message: '유저 인증 쿠키 값이 존재하지 않습니다.',
+    };
   try {
     console.log('Payload being sent to the API:', payload);
     const response = await fetch(
@@ -45,7 +53,7 @@ export async function oAuthSignUpAction(
         credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
-          'Cookie': 'oauth_cookie',
+          'Cookie': `oauth_cookie=${oauthCookie}`,
         },
         body: JSON.stringify(payload),
       }

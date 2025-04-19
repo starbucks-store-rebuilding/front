@@ -24,7 +24,6 @@ export default function ProductDesc({
   return (
     <section className="padded" ref={sectionRef}>
       <h2 className="font-pretendard font-bold text-lg pb-10">상품 정보</h2>
-      {/* global css로 옮기기? */}
       <style jsx global>{`
         .collapse_on,
         .collapse_off,
@@ -34,9 +33,6 @@ export default function ProductDesc({
         .warning_copyright {
           display: none;
         }
-        /* .inner-html {
-          width: 100%;
-        } */
         .inner-html img {
           width: 100% !important;
           object-fit: cover;

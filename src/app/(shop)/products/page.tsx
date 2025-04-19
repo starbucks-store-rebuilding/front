@@ -5,6 +5,7 @@ import {
 import ProductFilterList from '@/components/pages/products/ProductFilterList';
 import ProductList from '@/components/pages/products/ProductList';
 import ProductSortMenu from '@/components/pages/products/ProductSortMenu';
+import SearchKeywordResult from '@/components/pages/products/SearchKeywordResult';
 import { getProductDataType } from '@/types/RequestDataTypes';
 
 export default async function ProductListPage({
@@ -43,6 +44,7 @@ export default async function ProductListPage({
 
   return (
     <main>
+      {params.keyword && <SearchKeywordResult keyword={params.keyword} />}
       <ProductFilterList
         categoryItems={categoryItems}
         selectedCategory={selectedCategory}

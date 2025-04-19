@@ -1,13 +1,16 @@
 'use client';
+import { EventBannerImageType } from '@/types/ProductResponseDataTypes';
 import { BannerSlideImageType } from '@/types/ResponseDataTypes';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useState, useEffect, useRef } from 'react';
+import { CommonResposiveNextImage } from '../CommonResponsiveNextImage';
 
 export default function BannerSlide({
   slides,
   autoSlide = true,
 }: {
-  slides: BannerSlideImageType[];
+  slides: EventBannerImageType[] | BannerSlideImageType[];
   autoSlide?: boolean;
 }) {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -93,21 +96,34 @@ export default function BannerSlide({
         className="flex transition-transform duration-500"
         style={{ transform: `translateX(-${currentIndex * 100}%)` }}
       >
-        {slides.map((slide) => (
-          <li
-            key={slide.id}
-            className="w-full flex-shrink-0 relative list-none pb-[100%]"
-          >
-            <Image
-              src={slide.imageUrl}
-              alt={slide.description}
-              fill
-              sizes="100vw"
-              className="object-cover w-full h-full pointer-events-none"
-              priority
-            />
-          </li>
-        ))}
+        {slides.map((slide) => {
+          const isEventBanner = 'eventUuid' in slide;
+          if (isEventBanner) {
+            return (
+              <Link
+                href={`/event?event=${slide.eventUuid}`}
+                key={slide.mainBannerImageUuid}
+                className="w-full flex-shrink-0 relative list-none"
+              >
+                <CommonResposiveNextImage
+                  ImageUrl={slide.imageUrl}
+                  description={slide.description}
+                />
+              </Link>
+            );
+          }
+          return (
+            <li
+              key={slide.id}
+              className="w-full flex-shrink-0 relative list-none"
+            >
+              <CommonResposiveNextImage
+                ImageUrl={slide.imageUrl}
+                description={slide.description}
+              />
+            </li>
+          );
+        })}
       </ul>
       <ul className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2">
         {slides.length > 1 &&

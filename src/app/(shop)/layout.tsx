@@ -1,6 +1,6 @@
 import Footer from '@/components/layouts/footer/Footer';
 import HeaderTop from '@/components/layouts/header/HeaderTop';
-import { SidebarContextProvider } from '@/context/SideBarContext';
+import { ModalContextProvider } from '@/context/SideBarContext';
 
 export default function ShopLayout({
   children,
@@ -9,10 +9,10 @@ export default function ShopLayout({
 }>) {
   return (
     <>
-      <SidebarContextProvider>
+      <ModalContextProvider>
         <HeaderTop />
         <div className="pt-14">{children}</div>
-      </SidebarContextProvider>
+      </ModalContextProvider>
       <Footer />
     </>
   );

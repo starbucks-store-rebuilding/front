@@ -1,4 +1,8 @@
-import { ProductOptionType } from './ProductResponseDataTypes';
+import {
+  EventDataType,
+  ProductNameDataType,
+  ProductOptionType,
+} from './ProductResponseDataTypes';
 
 export interface SignUpStoreStateType {
   emailId: string;
@@ -52,4 +56,9 @@ export interface SelectedOptionWithNames extends ProductOptionType {
   colorName?: string;
   sizeName?: string;
   quantity: number;
+}
+
+export interface EventWithProductsType {
+  event: EventDataType;
+  products: ProductNameDataType[];
 }

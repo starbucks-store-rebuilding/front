@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import RightArrowIcon from '@/components/ui/icons/RightArrowIcon';
-import { useSideBarContext } from '@/context/SideBarContext';
+import { useModalContext } from '@/context/SideBarContext';
 
 interface Props {
   href: string;
@@ -9,7 +9,7 @@ interface Props {
 }
 
 export default function MenuBannerItem({ href, title, description }: Props) {
-  const { setIsOpen } = useSideBarContext();
+  const { setIsOpen } = useModalContext();
   return (
     <li className="h-19.5 hover:bg-gray-100 flex items-center">
       <Link

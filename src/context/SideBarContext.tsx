@@ -1,24 +1,32 @@
 'use client';
 import React, { createContext, useContext, useState } from 'react';
 
-interface SidebarContextType {
+interface ModalContextType {
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  isSearchOpen: boolean;
+  setIsSearchOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const SidebarContext = createContext<SidebarContextType>(
-  {} as SidebarContextType
+export const ModalContext = createContext<ModalContextType>(
+  {} as ModalContextType
 );
-export const useSideBarContext = () => useContext(SidebarContext);
+export const useModalContext = () => useContext(ModalContext);
 
-export function SidebarContextProvider({
+export function ModalContextProvider({
   children,
 }: {
   children: React.ReactNode;
 }) {
   const [isOpen, setIsOpen] = useState(false);
-  const value = { isOpen, setIsOpen };
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const value = {
+    isOpen,
+    setIsOpen,
+    isSearchOpen,
+    setIsSearchOpen,
+  };
   return (
-    <SidebarContext.Provider {...{ value }}>{children}</SidebarContext.Provider>
+    <ModalContext.Provider {...{ value }}>{children}</ModalContext.Provider>
   );
 }

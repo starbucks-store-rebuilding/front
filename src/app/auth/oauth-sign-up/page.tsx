@@ -30,51 +30,12 @@ export default function page() {
   //     return { success: true };
   //   }
   // };
-  const onClick = async () => {
-    const dummyData = {
-      password: 'dummyPassword123!',
-      name: '이름hkj',
-      nickname: 'dummyNick',
-      phoneNumber: '010-1666-5678',
-      birthdate: '1990-01-01',
-      gender: '남성',
-    };
-
-    try {
-      console.log('Payload being sent to the API:', dummyData);
-      const response = await fetch(
-        `${process.env.BASE_API_URL}/api/v1/oauth/sign-up`,
-        {
-          method: 'POST',
-          credentials: 'include',
-          headers: {
-            'Content-Type': 'application/json',
-            'Cookie': 'oauth_cookie',
-          },
-          body: JSON.stringify(dummyData),
-        }
-      );
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        console.error('Sign-up failed:', errorData);
-        return { success: false, message: errorData.message };
-      }
-
-      return await response.json();
-
-      // const result = await oAuthSignUpAction(dummyData);
-      // console.log('회원가입 결과:', result);
-    } catch (e) {
-      console.log('실패');
-    }
-  };
   const onClickServer = async () => {
     const dummyData = {
       password: 'dummyPassword123!',
-      name: '이름hkj',
-      nickname: 'dummyNick',
-      phoneNumber: '010-1666-5678',
+      name: '이름hkj1',
+      nickname: 'dummyNick1',
+      phoneNumber: '010-1666-5648',
       birthdate: '1990-01-01',
       gender: '남성',
     };
@@ -85,7 +46,6 @@ export default function page() {
   return (
     <>
       {/* <MultiStepSignUp handleSignUp={handleSignUp} /> */}
-      <button onClick={onClick}>클라이언트</button>
       <button onClick={onClickServer}>서버</button>
     </>
   );
